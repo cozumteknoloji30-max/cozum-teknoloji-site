@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Hacker Admin Paneli</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="admin.js" defer></script>
+
+    <style>
+        body {
+            background: #000;
+            color: #00ff00;
+            font-family: "Courier New", monospace;
+        }
+
+        header h1 {
+            text-align: center;
+            padding: 20px;
+            font-size: 40px;
+            text-shadow: 0 0 10px #0f0;
+            animation: glow 1.3s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #0f0; }
+            to   { text-shadow: 0 0 20px #00ff00; }
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #0f0;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .btn {
+            background: black;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #003300;
+        }
+
+        /* Düzenleme penceresi */
+        #editPopup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: black;
+            border: 2px solid #00ff00;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 0 20px #00ff00;
+        }
+
+        #editPopup input {
+            width: 100%;
+            padding: 8px;
+            background: #001900;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>HACKED ADMIN PANEL</h1>
+</header>
+
+<section class="icerik">
+
+    <h2>≡ Kayıtlı Kullanıcılar</h2>
+    <table id="userTable">
+        <tr>
+            <th>Kullanıcı Adı</th>
+            <th>Şifre</th>
+            <th>İşlem</th>
+        </tr>
+    </table>
+
+    <button class="btn" onclick="logout()">Çıkış Yap</button>
+</section>
+
+
+<!-- Düzenleme Popup -->
+<div id="editPopup">
+    <h3>Kullanıcı Düzenle</h3>
+
+    <label>Yeni Kullanıcı Adı:</label>
+    <input type="text" id="newUsername">
+
+    <label>Yeni Şifre:</label>
+    <input type="text" id="newPassword">
+
+    <button class="btn" onclick="saveEdit()">Kaydet</button>
+    <button class="btn" onclick="closePopup()">Kapat</button>
+</div>
+
+
+<footer>© 2025 Hacker Admin</footer>
+
+</body>
+</html>

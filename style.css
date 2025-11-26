@@ -1,0 +1,176 @@
+/* Genel stil ayarları */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+header {
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+
+header h1 {
+    font-size: 32px;
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a, .btn {
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 12px 25px;
+    background-color: #0073e6;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+nav ul li a:hover, .btn:hover {
+    background-color: #005bb5;
+}
+
+/* Sayfa içerik alanı */
+.icerik {
+    width: 100%;
+    max-width: 900px;
+    margin-top: 100px;
+    background-color: #fff;
+    color: #333;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+}
+
+input[type="text"], input[type="password"], textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    font-size: 14px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
+    outline: none;
+    border-color: #0073e6;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    background-color: #0073e6;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #005bb5;
+}
+
+/* Admin paneli özel stil */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+button.edit-btn {
+    background-color: #f39c12;
+}
+
+button.delete-btn {
+    background-color: #e74c3c;
+}
+
+/* Formlar ve düğmeler */
+input, button {
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+/* Footer */
+footer {
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+    color: #bbb;
+    font-size: 14px;
+}
+header {
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    margin: 5px 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background: #0073e6;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    background: #005bb5;
+}
