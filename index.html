@@ -1,40 +1,66 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <title>Anasayfa</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Şirket - Anasayfa</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-    <h1>Web Sitesi</h1>
-    <nav>
-        <ul>
-            <li><a href="hakkimizda.html">Hakkımızda</a></li>
-            <li><a href="urunler.html">Ürünler</a></li>
-            <li><a href="iletisim.html">İletişim</a></li>
-            <li><a href="giris.html">Giriş Yap</a></li>
-            <li><a href="kayit.html">Kayıt Ol</a></li>
-            <li><a href="#" onclick="logout()">Çıkış Yap</a></li>
-        </ul>
-    </nav>
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">CT</div>
+    <h1>Çözüm Teknoloji</h1>
+  </div>
+
+  <div class="menu-trigger">
+    <button class="menu-button" id="menuBtn" aria-label="Menü">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </button>
+    <div class="menu-dropdown" id="menu">
+      <a href="index.html">Anasayfa</a>
+      <a href="hakkimizda.html">Hakkımızda</a>
+      <a href="urunler.html">Ürünler</a>
+      <a href="iletisim.html">İletişim</a>
+      <a href="giris.html">Giriş Yap</a>
+      <a href="kayit.html">Kayıt Ol</a>
+    </div>
+  </div>
 </header>
 
-<section class="icerik">
-    <h2>Hoş Geldiniz</h2>
-    <p>Bu web sitesi modern tasarım ve giriş–kayıt sistemi ile hazırlanmıştır.</p>
-</section>
+<main class="container">
+  <section class="card">
+    <h2 class="section-title">Kurumsal Teknoloji Çözümleri</h2>
+    <p>Çözüm Teknoloji olarak yenilikçi web çözümleri üretiyoruz. Kurumsal seviyede güvenli, hızlı ve ölçeklenebilir yazılımlar geliştiriyoruz.</p>
+    <p><a class="btn" href="urunler.html">Hizmetlerimizi Gör</a></p>
+  </section>
 
-<footer>
-    © 2025 - Tüm Hakları Saklıdır.
-</footer>
+  <section style="margin-top:18px;">
+    <div class="card">
+      <h3 class="section-title">Neden Bizi Seçmelisiniz?</h3>
+      <ul>
+        <li>Uzman ekip</li>
+        <li>Hızlı teslimat</li>
+        <li>7/24 destek</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Çözüm Teknoloji
+  </footer>
+</main>
+
 <script>
-function logout(){
-    localStorage.removeItem("oturum"); // ⭐ oturumu sil
-    alert("Çıkış yapıldı!");
-    location.href = "giris.html";
-}
+document.getElementById('menuBtn').addEventListener('click', function(e){
+  const m = document.getElementById('menu');
+  m.style.display = (m.style.display === 'block') ? 'none' : 'block';
+});
+document.addEventListener('click', function(e){
+  const menu = document.getElementById('menu');
+  const btn = document.getElementById('menuBtn');
+  if(!btn.contains(e.target) && !menu.contains(e.target)) menu.style.display = 'none';
+});
 </script>
-
 </body>
 </html>

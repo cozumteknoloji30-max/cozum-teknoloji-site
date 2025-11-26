@@ -1,33 +1,55 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <title>Ürünler</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ürünler</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-    <h1>Ürünler</h1>
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">CT</div>
+    <h1>Çözüm Teknoloji</h1>
+  </div>
+  <div class="menu-trigger">
+    <button class="menu-button" id="menuBtn3" aria-label="Menü">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </button>
+    <div class="menu-dropdown" id="menu3">
+      <a href="index.html">Anasayfa</a>
+      <a href="hakkimizda.html">Hakkımızda</a>
+      <a href="urunler.html">Ürünler</a>
+      <a href="iletisim.html">İletişim</a>
+      <a href="giris.html">Giriş Yap</a>
+      <a href="kayit.html">Kayıt Ol</a>
+    </div>
+  </div>
 </header>
-<nav>
-        <ul>
-            <li><a href="index.html">Anasayfa</a></li>
-            <li><a href="hakkimizda.html">Hakkımızda</a></li>
-            <li><a href="iletisim.html">İletişim</a></li>
-            <li><a href="giris.html">Giriş Yap</a></li>
-            <li><a href="kayit.html">Kayıt Ol</a></li>
-        </ul>
-    </nav>
 
-
-<section class="icerik">
-    <ul class="product-list">
-        <li class="product">Ürün 1</li>
-        <li class="product">Ürün 2</li>
-        <li class="product">Ürün 3</li>
+<main class="container">
+  <section class="card">
+    <h2 class="section-title">Ürünlerimiz</h2>
+    <ul>
+      <li>Web Sitesi Tasarımı</li>
+      <li>Mobil Uygulama Geliştirme</li>
+      <li>Backend & Bulut Çözümleri</li>
     </ul>
-</section>
+  </section>
 
-<footer>© 2025</footer>
+  <footer>© 2025 Çözüm Teknoloji</footer>
+</main>
+
+<script>
+document.getElementById('menuBtn3').addEventListener('click', function(e){
+  const m = document.getElementById('menu3');
+  m.style.display = (m.style.display === 'block') ? 'none' : 'block';
+});
+document.addEventListener('click', function(e){
+  const menu = document.getElementById('menu3');
+  const btn = document.getElementById('menuBtn3');
+  if(!btn.contains(e.target) && !menu.contains(e.target)) menu.style.display = 'none';
+});
+</script>
 </body>
 </html>

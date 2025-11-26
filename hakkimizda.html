@@ -1,33 +1,51 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <title>Hakkımızda</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hakkımızda</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-    <h1>Hakkımızda</h1>
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">CT</div>
+    <h1>Çözüm Teknoloji</h1>
+  </div>
+  <div class="menu-trigger">
+    <button class="menu-button" id="menuBtn2" aria-label="Menü">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </button>
+    <div class="menu-dropdown" id="menu2">
+      <a href="index.html">Anasayfa</a>
+      <a href="hakkimizda.html">Hakkımızda</a>
+      <a href="urunler.html">Ürünler</a>
+      <a href="iletisim.html">İletişim</a>
+      <a href="giris.html">Giriş Yap</a>
+      <a href="kayit.html">Kayıt Ol</a>
+    </div>
+  </div>
 </header>
-<nav>
-    <ul>
-        <li><a href="index.html">Anasayfa</a></li>
-        <li><a href="urunler.html">Ürünler</a></li>
-        <li><a href="iletisim.html">İletişim</a></li>
-        <li><a href="giris.html">Giriş Yap</a></li>
-        <li><a href="kayit.html">Kayıt Ol</a></li>
 
-    </ul>
-</nav>
+<main class="container">
+  <section class="card">
+    <h2 class="section-title">Biz Kimiz?</h2>
+    <p>Modern web tasarımı ve kurumsal çözümler üreten bir yazılım ekibiyiz.</p>
+  </section>
 
+  <footer>© 2025 Çözüm Teknoloji</footer>
+</main>
 
-
-<section class="icerik">
-    <h2>Biz Kimiz?</h2>
-    <p>Modern web tasarımı ve kullanıcı giriş sistemi geliştiren bir öğrenciyiz.</p>
-</section>
-
-<footer>© 2025</footer>
-
+<script>
+document.getElementById('menuBtn2').addEventListener('click', function(e){
+  const m = document.getElementById('menu2');
+  m.style.display = (m.style.display === 'block') ? 'none' : 'block';
+});
+document.addEventListener('click', function(e){
+  const menu = document.getElementById('menu2');
+  const btn = document.getElementById('menuBtn2');
+  if(!btn.contains(e.target) && !menu.contains(e.target)) menu.style.display = 'none';
+});
+</script>
 </body>
 </html>

@@ -1,116 +1,213 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <title>Hacker Admin Paneli</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="admin.js" defer></script>
-
-    <style>
-        body {
-            background: #000;
-            color: #00ff00;
-            font-family: "Courier New", monospace;
-        }
-
-        header h1 {
-            text-align: center;
-            padding: 20px;
-            font-size: 40px;
-            text-shadow: 0 0 10px #0f0;
-            animation: glow 1.3s infinite alternate;
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 0 5px #0f0; }
-            to   { text-shadow: 0 0 20px #00ff00; }
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            border: 1px solid #0f0;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .btn {
-            background: black;
-            border: 1px solid #00ff00;
-            color: #00ff00;
-            padding: 6px 12px;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: #003300;
-        }
-
-        /* Düzenleme penceresi */
-        #editPopup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: black;
-            border: 2px solid #00ff00;
-            padding: 20px;
-            width: 300px;
-            box-shadow: 0 0 20px #00ff00;
-        }
-
-        #editPopup input {
-            width: 100%;
-            padding: 8px;
-            background: #001900;
-            border: 1px solid #00ff00;
-            color: #00ff00;
-            margin-bottom: 10px;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Paneli</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* Admin overrides */
+body { overflow:hidden; }
+#matrix { position:fixed; inset:0; z-index:-1; }
+.admin-wrap {
+  position:relative;
+  margin:40px auto;
+  max-width:1000px;
+  color:#cceeff;
+}
+.admin-panel {
+  background: rgba(2,8,18,0.6);
+  border:1px solid rgba(0,160,255,0.12);
+  padding:18px;
+  border-radius:10px;
+  box-shadow: 0 8px 40px rgba(0,120,255,0.08);
+}
+.table {
+  width:100%;
+  margin-top:10px;
+  border-collapse:collapse;
+}
+.table th, .table td {
+  padding:10px;
+  border-bottom:1px solid rgba(0,120,255,0.06);
+  text-align:left;
+}
+.btn-small {
+  padding:6px 10px; border-radius:6px; border:none; cursor:pointer;
+}
+.btn-edit { background:#00a0ff; color:#001218; }
+.btn-del { background:#ff6b6b; color:#fff; }
+#editPopup {
+  position:fixed; left:50%; top:50%; transform:translate(-50%,-50%);
+  background:#00111a; padding:16px; border-radius:8px; display:none;
+  border:1px solid rgba(0,160,255,0.15);
+}
+#editPopup input { margin-bottom:8px; width:100%; padding:8px; border-radius:6px; background:rgba(255,255,255,0.02); border:1px solid rgba(0,120,255,0.06); color:#dff6ff; }
+</style>
 </head>
-
 <body>
 
-<header>
-    <h1>HACKED ADMIN PANEL</h1>
+<canvas id="matrix"></canvas>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">CT</div>
+    <h1>Admin Paneli</h1>
+  </div>
+  <div style="width:120px;"></div>
 </header>
 
-<section class="icerik">
+<div style="margin-top:110px;"></div>
 
-    <h2>≡ Kayıtlı Kullanıcılar</h2>
-    <table id="userTable">
-        <tr>
-            <th>Kullanıcı Adı</th>
-            <th>Şifre</th>
-            <th>İşlem</th>
-        </tr>
+<div class="container admin-wrap">
+  <div class="admin-panel">
+    <h2>Yönetici - Kullanıcılar</h2>
+    <p id="statusInfo">Sunucu ile bağlantı deneniyor...</p>
+    <table class="table" id="userTable">
+      <thead><tr><th>Kullanıcı</th><th>Şifre</th><th>İşlem</th></tr></thead>
+      <tbody></tbody>
     </table>
-
-    <button class="btn" onclick="logout()">Çıkış Yap</button>
-</section>
-
-
-<!-- Düzenleme Popup -->
-<div id="editPopup">
-    <h3>Kullanıcı Düzenle</h3>
-
-    <label>Yeni Kullanıcı Adı:</label>
-    <input type="text" id="newUsername">
-
-    <label>Yeni Şifre:</label>
-    <input type="text" id="newPassword">
-
-    <button class="btn" onclick="saveEdit()">Kaydet</button>
-    <button class="btn" onclick="closePopup()">Kapat</button>
+    <div style="margin-top:12px;">
+      <button class="btn" onclick="logout()">Çıkış Yap</button>
+    </div>
+  </div>
 </div>
 
+<!-- edit popup -->
+<div id="editPopup">
+  <h4>Kullanıcı Düzenle</h4>
+  <label>Mevcut Kullanıcı</label>
+  <input id="oldUser" disabled>
+  <label>Yeni Kullanıcı Adı</label>
+  <input id="newUser">
+  <label>Yeni Şifre</label>
+  <input id="newPass">
+  <div style="text-align:right; margin-top:8px;">
+    <button class="btn" onclick="saveEdit()">Kaydet</button>
+    <button class="btn ghost" onclick="closeEdit()">Kapat</button>
+  </div>
+</div>
 
-<footer>© 2025 Hacker Admin</footer>
+<footer style="position:fixed;bottom:12px;left:0;right:0;text-align:center;color:#66c7ff;opacity:0.9;">© 2025 Çözüm Teknoloji - Admin</footer>
 
+<script>
+// Matrix rain (blue)
+const canvas = document.getElementById('matrix');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+const fontSize = 14;
+const columns = Math.floor(canvas.width / fontSize);
+const drops = new Array(columns).fill(1);
+const chars = '01█▓▒░▲▼◆◇●○✦✧✩✪✫';
+function draw(){
+  ctx.fillStyle = 'rgba(0,0,0,0.08)';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = '#00e6ff';
+  ctx.font = fontSize + 'px monospace';
+  for(let i=0;i<drops.length;i++){
+    const text = chars[Math.floor(Math.random()*chars.length)];
+    ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+    if(drops[i]*fontSize > canvas.height && Math.random()>0.975) drops[i]=0;
+    drops[i]++;
+  }
+}
+setInterval(draw, 50);
+window.addEventListener('resize', ()=>{ canvas.width=window.innerWidth; canvas.height=window.innerHeight; });
+
+const backend = "https://cozum-teknoloji.onrender.com";
+
+function requireAdmin(){
+  const s = localStorage.getItem('oturum');
+  if(s !== 'admin'){
+    alert('Bu sayfaya erişim yetkiniz yok. Admin olarak giriş yapın.');
+    window.location.href = 'giris.html';
+  }
+}
+
+requireAdmin();
+
+async function loadUsers(){
+  try{
+    const res = await fetch(backend + '/users');
+    const data = await res.json();
+    const tbody = document.querySelector('#userTable tbody');
+    tbody.innerHTML = '';
+    if(typeof data === 'object'){
+      for(const username in data){
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${username}</td><td>${data[username]}</td>
+          <td>
+            <button class="btn-small btn-edit" onclick="openEdit('${username}','${data[username]}')">Düzenle</button>
+            <button class="btn-small btn-del" onclick="deleteUser('${username}')">Sil</button>
+          </td>`;
+        tbody.appendChild(tr);
+      }
+      document.getElementById('statusInfo').textContent = 'Kullanıcılar listelendi.';
+    } else {
+      document.getElementById('statusInfo').textContent = 'Beklenmeyen veri formatı.';
+    }
+  }catch(e){
+    document.getElementById('statusInfo').textContent = 'Sunucu hatası: ' + e.message;
+  }
+}
+
+function openEdit(user, pass){
+  document.getElementById('editPopup').style.display = 'block';
+  document.getElementById('oldUser').value = user;
+  document.getElementById('newUser').value = user;
+  document.getElementById('newPass').value = pass;
+}
+
+function closeEdit(){
+  document.getElementById('editPopup').style.display = 'none';
+}
+
+async function saveEdit(){
+  const oldUser = document.getElementById('oldUser').value;
+  const newUser = document.getElementById('newUser').value.trim();
+  const newPass = document.getElementById('newPass').value;
+
+  try{
+    const res = await fetch(backend + '/update', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ oldName:oldUser, newName:newUser, newPass:newPass })
+    });
+    if(res.ok){
+      alert('Güncellendi');
+      closeEdit();
+      loadUsers();
+    } else {
+      const j = await res.json();
+      alert(j.error || 'Güncelleme başarısız, backend endpoint yoksa bunu desteklemiyor.');
+    }
+  }catch(e){
+    alert('Sunucu hatası: ' + e.message);
+  }
+}
+
+async function deleteUser(user){
+  if(!confirm(user + ' silinsin mi?')) return;
+  try{
+    const res = await fetch(backend + '/delete', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ username:user })
+    });
+    if(res.ok){ alert('Silindi'); loadUsers(); }
+    else { const j = await res.json(); alert(j.error || 'Silme başarısız'); }
+  }catch(e){
+    alert('Sunucu hatası: ' + e.message);
+  }
+}
+
+function logout(){
+  localStorage.removeItem('oturum');
+  alert('Çıkış yapıldı');
+  window.location.href = 'giris.html';
+}
+
+loadUsers();
+</script>
 </body>
 </html>
