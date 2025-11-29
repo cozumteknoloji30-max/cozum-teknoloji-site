@@ -209,5 +209,34 @@ function logout(){
 
 loadUsers();
 </script>
+  <script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, updatePassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCLfmodr56PVOoE70L9DdqRxj2iDQu5Z6s",
+  authDomain: "cozum-teknoloji.firebaseapp.com",
+  projectId: "cozum-teknoloji",
+  storageBucket: "cozum-teknoloji.firebasestorage.app",
+  messagingSenderId: "718990795924",
+  appId: "1:718990795924:web:b00f55427cbfefda180081"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+document.getElementById("sifreBtn").addEventListener("click", () => {
+    const newPass = document.getElementById("yenisifre").value;
+
+    updatePassword(auth.currentUser, newPass)
+    .then(() => {
+        alert("Şifre başarıyla değiştirildi!");
+    })
+    .catch(err => {
+        alert("HATA: " + err.message);
+    });
+});
+</script>
+
 </body>
 </html>
